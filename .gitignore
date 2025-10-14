@@ -1,0 +1,33 @@
+# Ignore Visual Studio cache folders
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+out/
+Debug/
+Release/
+x64/
+x86/
+build/
+
+# Packages
+*.nupkg
+*.snupkg
+*.pdb
+*.dll
+
+# Logs
+*.log
+
+# Secrets and configs
+appsettings.Development.json
+.env
+
+# Database and temporary files
+*.db
+*.sqlite

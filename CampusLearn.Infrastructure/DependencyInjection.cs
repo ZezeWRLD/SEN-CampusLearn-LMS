@@ -17,6 +17,9 @@ namespace CampusLearn.Infrastructure
             IConfiguration configuration)
         {
             var connection = configuration.GetConnectionString("SupabaseConnection");
+           if (string.IsNullOrEmpty(connection)) {
+                throw new InvalidOperationException("Connection string 'SupabaseConnection' not found.");
+            }
             services.AddDbContext<CampusLearnDbContext>(
                 options => options.UseNpgsql(connection));
 

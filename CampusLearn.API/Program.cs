@@ -1,7 +1,14 @@
-using CampusLearn.Infrastructure;
 using CampusLearn.Application;
+using CampusLearn.Infrastructure;
+using CampusLearn.Infrastructure.Data;
+using DotNetEnv;
+
 
 var builder = WebApplication.CreateBuilder(args);
+Env.Load();
+
+Console.WriteLine(builder.Configuration.GetConnectionString("SupabaseConnection"));
+
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -26,5 +33,21 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<CampusLearnDbContext>();
+    try
+    {
+        if (db.Database.CanConnect())
+            Console.WriteLine("Database verified on startup!");
+        else
+            Console.WriteLine("Database connection failed at startup.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Database check error: {ex.Message}");
+    }
+}
 
 app.Run();

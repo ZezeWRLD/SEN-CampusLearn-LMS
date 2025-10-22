@@ -7,6 +7,7 @@
         height: 100vh; /* Ensure it fills the whole screen */
         width: 100%;
         overflow: auto; /* Allow scrolling if content is too tall on small screens */
+        
     }
 
     /* Simple footer style */
@@ -15,6 +16,7 @@
         bottom: 16px;
         width: 100%;
         text-align: center;
+       
     }
 </style>
 
@@ -47,7 +49,8 @@
                           Label="Email Address"
                           Variant="Variant.Outlined"
                           Class="mt-4"
-                          IconSize="Size.Small" />
+                          IconSize="Size.Small" 
+                          Required/>
 
             <MudTextField T="string"
                           Label="Password"
@@ -57,7 +60,8 @@
                           Adornment="Adornment.End"
                           AdornmentIcon="@_passwordInputIcon"
                           OnAdornmentClick="TogglePasswordVisibility"
-                          IconSize="Size.Small" />
+                          IconSize="Size.Small" 
+                          Required/>
 
             <div class="d-flex justify-space-between align-center mt-4">
                 <MudCheckBox T="bool" Label="Remember me" Size="Size.Small" />

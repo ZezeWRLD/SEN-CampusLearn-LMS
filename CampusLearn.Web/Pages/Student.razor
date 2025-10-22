@@ -32,7 +32,7 @@
             <MudNavLink Href="/resources" Icon="@Icons.Material.Filled.Folder">Resources</MudNavLink>
             <MudNavLink Href="/topics" Icon="@Icons.Material.Filled.Topic">Topics</MudNavLink>
             <MudDivider Class="my-2" />
-            <MudNavLink Href="/logout" Icon="@Icons.Material.Filled.Logout">Logout</MudNavLink>
+            <MudNavLink Href="/" Icon="@Icons.Material.Filled.Logout">Logout</MudNavLink>
         </MudNavMenu>
     </MudDrawer>
 
@@ -57,7 +57,7 @@
             </MudPaper>
 
             <!-- MY COURSES SECTION -->
-            <div class="d-flex justify-space-between align-center mt-6 mb-2">
+            <div class="d-flex justify-space-between align-center mt-6 mb-2" style="Width:100px "padding-right:200px">
                 <MudText Typo="Typo.h6"><b>My Courses</b></MudText>
                 <MudSelect T="string" Value="@("All Courses")" Variant="Variant.Outlined" Dense="true" Style="width: 150px;">
                     <MudSelectItem Value="@("All Courses")">All Courses</MudSelectItem>

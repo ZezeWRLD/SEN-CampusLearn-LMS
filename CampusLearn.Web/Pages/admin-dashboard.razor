@@ -1,6 +1,9 @@
 ﻿@layout Shared.EmptyLayout
 @page "/Admin-dashboard"
 @using System.Collections.Generic
+@using CampusLearn.Application.Services.Interfaces
+@using CampusLearn.Infrastructure;
+@using CampusLearn.Infrastructure.Data.Entities
 
 <MudLayout>
     <MudAppBar Elevation="1">
@@ -20,7 +23,22 @@
 
         <MudSpacer />
 
-        <MudIconButton Icon="@Icons.Material.Filled.Notifications" />
+
+        <MudMenu Icon="@Icons.Material.Filled.Notifications" Color="Color.Inherit">
+            @if (_notifications == null || !_notifications.Any())
+            {
+                <MudText Class="pa-2"> No notifications </MudText>
+            }
+            else
+            {
+                @foreach (var notif in _notifications)
+                {
+                    <MudMenuItem>
+                        <b>@notif.NotificationType</b>: @notif.NotificationBody
+                    </MudMenuItem>
+                }
+            }
+        </MudMenu>
         <MudIconButton Icon="@Icons.Material.Filled.ChatBubble" />
         <MudAvatar Image="https://mudblazor.com/images/avatars/4.png" />
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.End" OnClick="@((e) => _drawerOpen = !_drawerOpen)" Class="d-md-none" />
@@ -209,6 +227,19 @@
 
     private double[] _donutChartData = { 35.5, 25.0, 20.0, 12.0, 8.0 };
     private string[] _donutChartLabels = { "Mathematics", "Business", "Programming", "Design", "Others" };
+
+    private List<Notification> _notifications = new List<Notification>();
+    private bool _notificationsOpen = false;
+    @inject INotificationService NotificationService
+    protected override void OnInitialized()
+    {
+        _notifications = new List<Notification>
+        {
+            new Notification {NotificationType = "Email", NotificationBody = "Test Email sent to you."},
+            new Notification {NotificationType = "Reminder", NotificationBody = "Tutor responded to your message."}
+        };
+    }
+
 
     // --- Data for Table ---
     private class ActivityItem

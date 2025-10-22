@@ -31,13 +31,13 @@ namespace CampusLearn.Application.Services.Implementations
             _context = context;
             _twilioSid = configuration["Twilio:AccountSid"]
                 ?? throw new InvalidOperationException("Missing Twilio AccountSid");
-            _twilioToken = configuration["Twilio.AuthToken"]
+            _twilioToken = configuration["Twilio:AuthToken"]
                 ?? throw new InvalidOperationException("Missing Twilio AuthToken");
-            _twilioNumber = configuration["Twilio.FromNumber"]
+            _twilioNumber = configuration["Twilio:FromNumber"]
                 ?? throw new InvalidOperationException("Missing Twilio FromNumber");
-            _sendgridKey = configuration["SendGrid.ApiKey"]
+            _sendgridKey = configuration["SendGrid:ApiKey"]
                 ?? throw new InvalidOperationException("Missing SendGrid ApiKey");
-            _fromEmail = configuration["SendGrid.FromEmail"]
+            _fromEmail = configuration["SendGrid:FromEmail"]
                 ?? throw new InvalidOperationException("Missing SendGrid FromEmail");
 
             TwilioClient.Init(_twilioSid, _twilioToken);

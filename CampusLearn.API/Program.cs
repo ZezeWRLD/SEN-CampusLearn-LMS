@@ -1,4 +1,6 @@
 using CampusLearn.Application;
+using CampusLearn.Application.Services.Implementations;
+using CampusLearn.Application.Services.Interfaces;
 using CampusLearn.Infrastructure;
 using CampusLearn.Infrastructure.Data;
 using DotNetEnv;
@@ -15,6 +17,7 @@ Console.WriteLine(builder.Configuration.GetConnectionString("SupabaseConnection"
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddScoped<INotificationService, NotificationService>();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -35,7 +38,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = jwtSettings["Issuer"],
         ValidAudience = jwtSettings["Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!))
     };
 });
 

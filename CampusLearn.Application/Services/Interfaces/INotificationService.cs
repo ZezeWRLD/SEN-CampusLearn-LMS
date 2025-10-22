@@ -15,5 +15,8 @@ namespace CampusLearn.Application.Services.Interfaces
 
         Task<Notification?> UpdateNotificationAsync(int id, Notification updatedNotification);  
         Task<bool> DeleteNotificationAsync(int id);
+        Task SendSmsAsync(string to, string message);
+        Task SendWhatsappAsync(string to, string message);
+        Task SendEmailAsync(string to, string subject, string body);
     }
 }

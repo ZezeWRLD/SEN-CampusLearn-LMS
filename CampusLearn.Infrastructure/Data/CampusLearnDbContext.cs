@@ -32,6 +32,7 @@ public partial class CampusLearnDbContext : DbContext
     public virtual DbSet<Notification> Notifications { get; set; }
 
     public virtual DbSet<Notificationpreference> Notificationpreferences { get; set; }
+    public virtual DbSet<Password> Passwords { get; set; }
 
     public virtual DbSet<Question> Questions { get; set; }
 
@@ -50,8 +51,12 @@ public partial class CampusLearnDbContext : DbContext
     public virtual DbSet<Vote> Votes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured) { 
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseNpgsql(" Host=aws-1-ap-southeast-2.pooler.supabase.com;Port=6543;Database=postgres;Username=postgres.tspbuvfvayujbjxtxngb;Password=3JAyVUlQf3h3O28f;Pooling=false;SSL Mode=Require;Trust Server Certificate=true;Timeout=15;Keepalive=30;");
+        }
+    } 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -489,6 +494,7 @@ public partial class CampusLearnDbContext : DbContext
 
             entity.HasOne(d => d.User)
                 .WithOne(p => p.Password)
+                .HasPrincipalKey<User>(p => p.UserEmail)
                 .HasForeignKey<Password>(d => d.UserEmail)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fk_user_email");

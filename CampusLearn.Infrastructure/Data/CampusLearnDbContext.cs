@@ -49,7 +49,6 @@ public partial class CampusLearnDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<Vote> Votes { get; set; }
-    public virtual DbSet<Password> Passwords { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

@@ -1,12 +1,19 @@
+using CampusLearn.Application.Services.Implementations;
+using CampusLearn.Application.Services.Interfaces;
+using CampusLearn.Infrastructure.Data;
 using CampusLearn.Web.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<CampusLearnDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMudServices();

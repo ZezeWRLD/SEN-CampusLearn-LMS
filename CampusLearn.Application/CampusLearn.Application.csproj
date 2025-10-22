@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CampusLearn.Domain\CampusLearn.Domain.csproj" />
+    <ProjectReference Include="..\CampusLearn.Infrastructure\CampusLearn.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

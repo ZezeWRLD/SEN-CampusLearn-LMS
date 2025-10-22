@@ -1,4 +1,5 @@
-﻿using CampusLearn.Infrastructure.Data;
+﻿using CampusLearn.Application.Services.Interfaces;
+using CampusLearn.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -9,17 +10,29 @@ namespace CampusLearn.API.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly CampusLearnDbContext _context;
-        public UsersController(CampusLearnDbContext context)
+        private readonly IUserService _userService;
+
+        public UsersController(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var users = _context.Users.Take(5).ToList();
+            var users = await _userService.GetAllAsync();
             return Ok(users);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var user = await _userService.GetByIdAsync(id);
+            if (user == null)
+                return NotFound();
+            return Ok(user);
+        }
+
+
     }
 }

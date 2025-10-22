@@ -1,0 +1,156 @@
+﻿@page "/studentDashboard"
+
+<MudAppBar Bottom="true" Fixed="true" Color="Color.Primary" Elevation="1">
+    <h2>CampusLearn</h2> 
+    <nav class="navbar">
+        <div class="container-fluid">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="searchBbtn" type="submit" Color>Search</button>
+
+                <MudIcon Icon="@Icons.Material.Filled.Email" Style="font-size: 20px;" />
+                <MudIcon Icon="@Icons.Material.Filled.Notifications" />
+            </form>
+        </div>
+    </nav>
+</MudAppBar>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item">
+            <NavLink class="nav-link" href="/StudentDashboard">
+                <span class="oi oi-home aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="/Courses">
+                <span class="oi oi-pencil" aria-hidden="true"></span> Courses
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="/Tutors">
+                <span class="oi oi-person" aria-hidden="true"></span> Tutors
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="/Resources">
+                <span class="oi oi-plus" aria-hidden="true"></span>Resources
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="/Topics">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>Topics
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="/Settings">
+                <span class="oi oi-cog" aria-hidden="true"></span>Settings
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="/">
+                <span class="oi oi-x" aria-hidden="true"></span>Logout
+            </NavLink>
+        </div>
+    </nav>
+</div>
+<br>
+@{
+    var username = " ";
+}
+
+<div Class="header">
+    <p><h1>Welcome Back! @username </h1><br />Ready tocontinue your learning journey?<br> </p>
+</div>
+<MudGrid>
+    <MudItem xs="12" sm="6" md="4">
+        <MudCard>
+            <MudCardContent>
+                <MudText> PRG381</MudText>
+                <MudText>Instructor: Person</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary">View Course</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="4">
+        <MudCard>
+            <MudCardContent>
+                <MudText> PRG381</MudText>
+                <MudText>Instructor: Person</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary">View Course</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="4">
+        <MudCard>
+            <MudCardContent>
+                <MudText> PRG381</MudText>
+                <MudText>Instructor: Person</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary">View Course</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="4">
+        <MudCard>
+            <MudCardContent>
+                <MudText> PRG381</MudText>
+                <MudText>Instructor: Person</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary">View Course</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    
+
+</MudGrid>
+<MudContainer>
+    <MudPaper Class="p-4 mt-4" Elevation="2">
+        <MudText>Recent Activity</MudText>
+        <MudDivider Class="mb-2" />
+        @foreach (var activity in recentActivities)
+        {
+            <MudText Class="mb-1">
+                <MudIcon Icon="@Icons.Material.Filled.History" Class="me-2" />
+                @activity.Description
+                <span class="text-muted" style="float:right;">@activity.Timestamp</span>
+            </MudText>
+        }
+</MudPaper>
+
+
+</MudContainer>
+
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    public class ActivityItem
+    {
+        public string Description { get; set; }
+        public string Timestamp { get; set; }
+    }
+
+    private List<ActivityItem> recentActivities = new()
+    {
+        new ActivityItem { Description = "Completed Project Session", Timestamp = "2 hours ago" },
+        new ActivityItem { Description = "Commented on Math chapter in MATH 381", Timestamp = "Yesterday" },
+        new ActivityItem { Description = "Received feedback on UXUA 381: \"Great job on the prototype!\"", Timestamp = "3 days ago" }
+    };
+}
+
+   

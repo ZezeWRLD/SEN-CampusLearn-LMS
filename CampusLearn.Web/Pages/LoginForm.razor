@@ -1,0 +1,54 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+
+
+<PageTitle>Login</PageTitle>
+
+<MudAppBar>
+    <MudIcon>CampusLearn</MudIcon>
+</MudAppBar>
+
+<MudForm>
+    <MudImage Src=""></MudImage>
+
+    <h1>Welcome Back</h1>
+    <h8>Sign into your CampusLearn account</h8>
+    <br>
+
+    <h8>Email Address</h8>
+    <MudTextField @bind-Value="email" Placeholder="email"  Required="true" />
+    <br>
+    <h8>Password</h8>
+    <MudTextField @bind-Value="password" Placeholder="password"  InputType="InputType.Password" Required="true" />
+    <br>
+    <MudCheckBox @bind-Value="rememberMe">Remember Me</MudCheckBox>
+ 
+    <MudButton Variant="Variant.Filled" OnClick="Submit">Login to CampusLearn</MudButton>
+    
+    <MudLink Href="">Forgot Your Password?</MudLink>
+
+</MudForm>
+
+
+
+@code {
+    
+    private string email = string.Empty;
+    private string password = string.Empty;
+    private bool rememberMe = false;
+    private string errorMessage = string.Empty;
+    private const string loginError = "Invalid email or password. Try again.";
+
+    public void Submit()
+    {
+        if (email == "1234@student.belgiumcampus.ac.za" && password == "password123")
+        {
+            Navigation.NavigateTo("/index");
+        }
+        else
+        {
+    
+            errorMessage = loginError;
+        }
+    }
+}

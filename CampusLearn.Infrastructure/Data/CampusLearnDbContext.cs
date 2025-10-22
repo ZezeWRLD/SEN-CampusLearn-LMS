@@ -214,6 +214,9 @@ public partial class CampusLearnDbContext : DbContext
             entity.Property(e => e.UserEmail)
                 .HasMaxLength(255)
                 .HasColumnName("user_email");
+            entity.Property(e => e.NotificationBody)
+                .HasMaxLength(255)
+                .HasColumnName("notification_body");
 
             entity.HasOne(d => d.UserEmailNavigation).WithMany(p => p.Notifications)
                 .HasPrincipalKey(p => p.UserEmail)

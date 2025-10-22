@@ -1,21 +1,20 @@
-﻿@page "/home"
+﻿@page "/student-dashboard"
 
 <MudLayout>
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.School" Edge="Edge.Start" />
         <MudText Typo="Typo.h6" Class="ml-2">CampusLearn</MudText>
-        
+
         <MudSpacer />
 
-        <MudTextField
-            T="string"
-            Variant="Variant.Outlined"
-            Placeholder="Search courses, assignments, or resources..."
-            Adornment="Adornment.Start"
-            AdornmentIcon="@Icons.Material.Filled.Search"
-            Class="hidden-sm-and-down"
-            Style="width: 400px; background-color: var(--mud-palette-appbar-background); border-radius: 4px;"
-            Margin="Margin.Dense" />
+        <MudTextField T="string"
+                      Variant="Variant.Outlined"
+                      Placeholder="Search courses, assignments, or resources..."
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      Class="hidden-sm-and-down"
+                      Style="width: 400px; background-color: var(--mud-palette-appbar-background); border-radius: 4px;"
+                      Margin="Margin.Dense" />
 
         <MudSpacer />
 
@@ -27,8 +26,8 @@
 
     <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" Variant="DrawerVariant.Persistent">
         <MudNavMenu Class="pa-2">
-            <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
-            <MudNavLink Href="/student-dashboard" Icon="@Icons.Material.Filled.Dashboard">Student Dashboard</MudNavLink>
+            <MudNavLink Href="/dashboard" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+            <MudNavLink Href="/student-dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">Student Dashboard</MudNavLink>
             <MudNavLink Href="/my-tutors" Icon="@Icons.Material.Filled.People">My Tutors</MudNavLink>
             <MudNavLink Href="/resources" Icon="@Icons.Material.Filled.Folder">Resources</MudNavLink>
             <MudNavLink Href="/topics" Icon="@Icons.Material.Filled.Topic">Topics</MudNavLink>
@@ -38,179 +37,183 @@
     </MudDrawer>
 
     <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.False" Class="mt-6 px-0">
+        <MudContainer MaxWidth="MaxWidth.False" Class="mt-6 px-4">
+
+            <!-- WELCOME BANNER -->
             <MudPaper Class="pa-4 rounded-lg mud-theme-primary" Elevation="0">
-                <MudText Typo="Typo.h5" Style="color: white;"><b>Welcome back, Sarah!</b></MudText>
-                <MudText Typo="Typo.body1" Style="color: white;">Ready to continue your learning journey?</MudText>
+                <MudText Typo="Typo.h5" Style="color: white;"><b>Welcome back, Sarah! 👋</b></MudText>
+                <MudText Typo="Typo.body1" Style="color: white;" Class="mb-2">Ready to continue your learning journey?</MudText>
+
+                <MudGrid>
+                    <MudItem xs="6" sm="3" md="2">
+                        <MudText Typo="Typo.h4" Style="color: white;"><b>6</b></MudText>
+                        <MudText Typo="Typo.body2" Style="color: white;">Active Courses</MudText>
+                    </MudItem>
+                    <MudItem xs="6" sm="3" md="2">
+                        <MudText Typo="Typo.h4" Style="color: white;"><b>89%</b></MudText>
+                        <MudText Typo="Typo.body2" Style="color: white;">Avg. Progress</MudText>
+                    </MudItem>
+                </MudGrid>
             </MudPaper>
 
-            <MudGrid Class="mt-4" Spacing="3">
-                <MudItem xs="12" sm="6" md="3">
-                    <MudPaper Outlined="true" Class="pa-3 d-flex align-center" Height="100%">
-                        <MudAvatar Color="Color.Primary" Square="true" Rounded="true">
-                            <MudIcon Icon="@Icons.Material.Filled.MenuBook" />
-                        </MudAvatar>
-                        <div class="ml-3">
-                            <MudText Typo="Typo.h6">View Topics</MudText>
-                            <MudText Typo="Typo.body2">Browse all through available courses</MudText>
-                        </div>
-                    </MudPaper>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="3">
-                    <MudPaper Outlined="true" Class="pa-3 d-flex align-center" Height="100%">
-                        <MudAvatar Color="Color.Info" Square="true" Rounded="true">
-                            <MudIcon Icon="@Icons.Material.Filled.TaskAlt" />
-                        </MudAvatar>
-                        <div class="ml-3">
-                            <MudText Typo="Typo.h6">View Tutors</MudText>
-                            <MudText Typo="Typo.body2">Check pending tasks</MudText>
-                        </div>
-                    </MudPaper>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="3">
-                    <MudPaper Outlined="true" Class="pa-3 d-flex align-center" Height="100%">
-                        <MudAvatar Color="Color.Warning" Square="true" Rounded="true">
-                            <MudIcon Icon="@Icons.Material.Filled.Forum" />
-                        </MudAvatar>
-                        <div class="ml-3">
-                            <MudText Typo="Typo.h6">Messages</MudText>
-                            <MudText Typo="Typo.body2">Chat with instructors</MudText>
-                        </div>
-                    </MudPaper>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="3">
-                    <MudPaper Outlined="true" Class="pa-3 d-flex align-center" Height="100%">
-                        <MudAvatar Color="Color.Error" Square="true" Rounded="true">
-                            <MudIcon Icon="@Icons.Material.Filled.CalendarMonth" />
-                        </MudAvatar>
-                        <div class="ml-3">
-                            <MudText Typo="Typo.h6">Schedule</MudText>
-                            <MudText Typo="Typo.body2">View upcoming events</MudText>
-                        </div>
-                    </MudPaper>
-                </MudItem>
-            </MudGrid>
-
-            <MudText Typo="Typo.h6" Class="mt-6 mb-2">Featured Announcements</MudText>
-            <MudPaper Outlined="true">
-                <MudList T="object" Clickable="false">
-                    <MudListItem T="object" Class="d-flex align-start">
-                        <MudAvatar Color="Color.Info" Square="true" Rounded="true" Class="mt-1">
-                            <MudIcon Icon="@Icons.Material.Filled.Campaign" />
-                        </MudAvatar>
-                        <div class="ml-3" style="flex-grow: 1;">
-                            <MudText Typo="Typo.subtitle1"><b>Tutor Registration Open</b></MudText>
-                            <MudText Typo="Typo.body2">Registration for Spring 2025 tutoring is now open. Don't miss out!</MudText>
-                            <MudText Typo="Typo.caption">3 hours ago</MudText>
-                        </div>
-                        <MudLink Href="#">Read More</MudLink>
-                    </MudListItem>
-                    <MudDivider />
-                    <MudListItem T="object" Class="d-flex align-start">
-                        <MudAvatar Color="Color.Success" Square="true" Rounded="true" Class="mt-1">
-                            <MudIcon Icon="@Icons.Material.Filled.EmojiEvents" />
-                        </MudAvatar>
-                        <div class="ml-3" style="flex-grow: 1;">
-                            <MudText Typo="Typo.subtitle1"><b>Achievement Unlocked!</b></MudText>
-                            <MudText Typo="Typo.body2">Congratulations! You've completed 5 sessions this semester.</MudText>
-                            <MudText Typo="Typo.caption">1 day ago</MudText>
-                        </div>
-                        <MudLink Href="#">View Certificate</MudLink>
-                    </MudListItem>
-                </MudList>
-            </MudPaper>
-
+            <!-- MY COURSES SECTION -->
             <div class="d-flex justify-space-between align-center mt-6 mb-2">
-                <MudText Typo="Typo.h6">Featured Courses</MudText>
-                <MudLink Href="#">View All</MudLink>
+                <MudText Typo="Typo.h6"><b>My Courses</b></MudText>
+                <MudSelect T="string" Value="@("All Courses")" Variant="Variant.Outlined" Dense="true" Style="width: 150px;">
+                    <MudSelectItem Value="@("All Courses")">All Courses</MudSelectItem>
+                    <MudSelectItem Value="@("Active")">Active</MudSelectItem>
+                    <MudSelectItem Value="@("Completed")">Completed</MudSelectItem>
+                </MudSelect>
             </div>
+
+            <!-- COURSE CARDS GRID -->
             <MudGrid Spacing="3">
+                <!-- Course 1: PRG 381 -->
                 <MudItem xs="12" sm="6" md="4">
-                    <MudCard>
-                        <MudCardMedia Image="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" Height="200" />
-                        <MudCardContent>
-                            <MudChip T="string" Label="true" Color="Color.Primary" Size="Size.Small">Computer Science</MudChip>
-                            <MudText Typo="Typo.h6" Class="mt-2">Introduction to Python Programming</MudText>
-                            <MudText Typo="Typo.body2" Class="mt-1">Learn the fundamentals of Python programming with hands-on projects.</MudText>
-                        </MudCardContent>
-                        <MudCardActions Class="px-4 pb-4">
-                            <MudAvatar Image="https://mudblazor.com/images/avatars/1.png" Size="Size.Small" />
-                            <MudText Typo="Typo.body2" Class="ml-2">Erik Magnuson</MudText>
-                            <MudSpacer />
-                            <MudIcon Icon="@Icons.Material.Filled.Star" Color="Color.Warning" />
-                            <MudText Typo="Typo.body2" Class="ml-1"><b>4.9</b></MudText>
-                        </MudCardActions>
-                    </MudCard>
+                    <MudPaper Outlined="true" Class="pa-4 rounded-lg" Height="100%">
+                        <div class="d-flex justify-space-between">
+                            <MudAvatar Color="Color.Primary" Rounded="true">
+                                <MudIcon Icon="@Icons.Material.Filled.Code" />
+                            </MudAvatar>
+                            <MudChip T="string" Label="true" Size="Size.Small" Color="Color.Success">Active</MudChip>
+                        </div>
+                        <MudText Typo="Typo.h6" Class="mt-3 mb-0"><b>PRG 381</b></MudText>
+                        <MudText Typo="Typo.body2" Color="Color.Inherit">Prof. Michael Chen</MudText>
+
+                        <MudText Typo="Typo.caption" Class="mt-3">Progress</MudText>
+                        <MudProgressLinear Color="Color.Primary" Value="85" Class="mt-1" />
+
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Class="mt-4">View Course</MudButton>
+                    </MudPaper>
                 </MudItem>
+
+                <!-- Course 2: MATH 381 -->
                 <MudItem xs="12" sm="6" md="4">
-                    <MudCard>
-                        <MudCardMedia Image="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" Height="200" />
-                        <MudCardContent>
-                            <MudChip T="string" Label="true" Color="Color.Success" Size="Size.Small">Business</MudChip>
-                            <MudText Typo="Typo.h6" Class="mt-2">Business Functions</MudText>
-                            <MudText Typo="Typo.body2" Class="mt-1">Master the essentials of digital marketing and social media strategy.</MudText>
-                        </MudCardContent>
-                        <MudCardActions Class="px-4 pb-4">
-                            <MudAvatar Image="https://mudblazor.com/images/avatars/5.png" Size="Size.Small" />
-                            <MudText Typo="Typo.body2" Class="ml-2">Laetitia Micou</MudText>
-                            <MudSpacer />
-                            <MudIcon Icon="@Icons.Material.Filled.Star" Color="Color.Warning" />
-                            <MudText Typo="Typo.body2" Class="ml-1"><b>4.8</b></MudText>
-                        </MudCardActions>
-                    </MudCard>
+                    <MudPaper Outlined="true" Class="pa-4 rounded-lg" Height="100%">
+                        <div class="d-flex justify-space-between">
+                            <MudAvatar Color="Color.Info" Rounded="true">
+                                <MudIcon Icon="@Icons.Material.Filled.Calculate" />
+                            </MudAvatar>
+                            <MudChip T="string" Label="true" Size="Size.Small" Color="Color.Success">Active</MudChip>
+                        </div>
+                        <MudText Typo="Typo.h6" Class="mt-3 mb-0"><b>MATH 381</b></MudText>
+                        <MudText Typo="Typo.body2" Color="Color.Inherit">Dr. Emily Rodriguez</MudText>
+
+                        <MudText Typo="Typo.caption" Class="mt-3">Progress</MudText>
+                        <MudProgressLinear Color="Color.Info" Value="72" Class="mt-1" />
+
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Class="mt-4">View Course</MudButton>
+                    </MudPaper>
                 </MudItem>
+
+                <!-- Course 3: PRJ 381 -->
                 <MudItem xs="12" sm="6" md="4">
-                    <MudCard>
-                        <MudCardMedia Image="https://images.unsplash.com/photo-1587440871875-191322ee64b0?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" Height="200" />
-                        <MudCardContent>
-                            <MudChip T="string" Label="true" Color="Color.Info" Size="Size.Small">Design</MudChip>
-                            <MudText Typo="Typo.h6" Class="mt-2">UI/UX Design Principles</MudText>
-                            <MudText Typo="Typo.body2" Class="mt-1">Create beautiful and functional user interfaces with modern design principles.</MudText>
-                        </MudCardContent>
-                        <MudCardActions Class="px-4 pb-4">
-                            <MudAvatar Image="https://mudblazor.com/images/avatars/6.png" Size="Size.Small" />
-                            <MudText Typo="Typo.body2" Class="ml-2">Christopher Wloka</MudText>
-                            <MudSpacer />
-                            <MudIcon Icon="@Icons.Material.Filled.Star" Color="Color.Warning" />
-                            <MudText Typo="Typo.body2" Class="ml-1"><b>4.7</b></MudText>
-                        </MudCardActions>
-                    </MudCard>
+                    <MudPaper Outlined="true" Class="pa-4 rounded-lg" Height="100%">
+                        <div class="d-flex justify-space-between">
+                            <MudAvatar Color="Color.Success" Rounded="true">
+                                <MudIcon Icon="@Icons.Material.Filled.AccountTree" />
+                            </MudAvatar>
+                            <MudChip T="string" Label="true" Size="Size.Small" Color="Color.Success">Active</MudChip>
+                        </div>
+                        <MudText Typo="Typo.h6" Class="mt-3 mb-0"><b>PRJ 381</b></MudText>
+                        <MudText Typo="Typo.body2" Color="Color.Inherit">Prof. David Thompson</MudText>
+
+                        <MudText Typo="Typo.caption" Class="mt-3">Progress</MudText>
+                        <MudProgressLinear Color="Color.Success" Value="85" class="mt-1" />
+
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Class="mt-4">View Course</MudButton>
+                    </MudPaper>
+                </MudItem>
+
+                <!-- Course 4: UX/UI 381 -->
+                <MudItem xs="12" sm="6" md="4">
+                    <MudPaper Outlined="true" Class="pa-4 rounded-lg" Height="100%">
+                        <div class="d-flex justify-space-between">
+                            <MudAvatar Color="Color.Error" Rounded="true">
+                                <MudIcon Icon="@Icons.Material.Filled.DesignServices" />
+                            </MudAvatar>
+                            <MudChip T="string" Label="true" Size="Size.Small" Color="Color.Warning">Due Soon</MudChip>
+                        </div>
+                        <MudText Typo="Typo.h6" Class="mt-3 mb-0"><b>UX/UI 381</b></MudText>
+                        <MudText Typo="Typo.body2" Color="Color.Inherit">Prof. Sarah Williams</MudText>
+
+                        <MudText Typo="Typo.caption" Class="mt-3">Progress</MudText>
+                        <MudProgressLinear Color="Color.Error" Value="62" Class="mt-1" />
+
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Class="mt-4">View Course</MudButton>
+                    </MudPaper>
+                </MudItem>
+
+                <!-- Course 5: MLG 381 -->
+                <MudItem xs="12" sm="6" md="4">
+                    <MudPaper Outlined="true" Class="pa-4 rounded-lg" Height="100%">
+                        <div class="d-flex justify-space-between">
+                            <MudAvatar Style="background-color: #6e42c1;" Rounded="true">
+                                <MudIcon Icon="@Icons.Material.Filled.DataObject" />
+                            </MudAvatar>
+                            <MudChip T="string" Label="true" Size="Size.Small" Color="Color.Success">Active</MudChip>
+                        </div>
+                        <MudText Typo="Typo.h6" Class="mt-3 mb-0"><b>MLG 381</b></MudText>
+                        <MudText Typo="Typo.body2" Color="Color.Inherit">Dr. James Parker</MudText>
+
+                        <MudText Typo="Typo.caption" Class="mt-3">Progress</MudText>
+                        <MudProgressLinear Style="color: #6e42c1;" Value="78" Class="mt-1" />
+
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Class="mt-4">View Course</MudButton>
+                    </MudPaper>
+                </MudItem>
+
+                <!-- Course 6: WPR 381 -->
+                <MudItem xs="12" sm="6" md="4">
+                    <MudPaper Outlined="true" Class="pa-4 rounded-lg" Height="100%">
+                        <div class="d-flex justify-space-between">
+                            <MudAvatar Color="Color.Warning" Rounded="true">
+                                <MudIcon Icon="@Icons.Material.Filled.Web" />
+                            </MudAvatar>
+                            <MudChip T="string" Label="true" Size="Size.Small" Color="Color.Default">Completed</MudChip>
+                        </div>
+                        <MudText Typo="Typo.h6" Class="mt-3 mb-0"><b>WPR 381</b></MudText>
+                        <MudText Typo="Typo.body2" Color="Color.Inherit">Prof. Lisa Anderson</MudText>
+
+                        <MudText Typo="Typo.caption" Class="mt-3">Progress</MudText>
+                        <MudProgressLinear Color="Color.Warning" Value="100" Class="mt-1" />
+
+                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" FullWidth="true" Class="mt-4">View Certificate</MudButton>
+                    </MudPaper>
                 </MudItem>
             </MudGrid>
 
-            <MudText Typo="Typo.h6" Class="mt-6 mb-2">Recent Topic Updates</MudText>
+            <!-- RECENT ACTIVITY SECTION -->
+            <MudText Typo="Typo.h6" Class="mt-6 mb-2"><b>Recent Activity</b></MudText>
             <MudPaper Outlined="true" Class="mb-6">
                 <MudList T="object" Clickable="false">
                     <MudListItem T="object">
-                        <MudAvatar Color="Color.Primary" Square="true" Rounded="true">
-                            <MudIcon Icon="@Icons.Material.Filled.Videocam" />
+                        <MudAvatar Color="Color.Success" Rounded="true">
+                            <MudIcon Icon="@Icons.Material.Filled.Check" />
                         </MudAvatar>
                         <div class="ml-3">
-                            <MudText Typo="Typo.subtitle1"><b>New session for Data Structures</b></MudText>
-                            <MudText Typo="Typo.body2">Live session on Trees and Traversal Methods</MudText>
-                            <MudText Typo="Typo.caption">30 minutes ago</MudText>
+                            <MudText Typo="Typo.body1">Completed Physics Session</MudText>
+                            <MudText Typo="Typo.caption">3 hours ago</MudText>
                         </div>
                     </MudListItem>
                     <MudDivider />
                     <MudListItem T="object">
-                        <MudAvatar Color="Color.Success" Square="true" Rounded="true">
-                            <MudIcon Icon="@Icons.Material.Filled.Assignment" />
+                        <MudAvatar Color="Color.Primary" Rounded="true">
+                            <MudIcon Icon="@Icons.Material.Filled.LibraryBooks" />
                         </MudAvatar>
-                        <div class="ml-3">
-                            <MudText Typo="Typo.subtitle1"><b>WPR 361</b></MudText>
-                            <MudText Typo="Typo.body2">Assignment 1 - Introduction change</MudText>
-                            <MudText Typo="Typo.caption">2 hours ago</MudText>
+                        <div classThis="ml-3">
+                            <MudText Typo="Typo.body1">Started new chapter in MATH 381</MudText>
+                            <MudText Typo="Typo.caption">5 hours ago</MudText>
                         </div>
                     </MudListItem>
                     <MudDivider />
                     <MudListItem T="object">
-                        <MudAvatar Color="Color.Warning" Square="true" Rounded="true">
-                            <MudIcon Icon="@Icons.Material.Filled.Chat" />
+                        <MudAvatar Color="Color.Warning" Rounded="true">
+                            <MudIcon Icon="@Icons.Material.Filled.Feedback" />
                         </MudAvatar>
                         <div class="ml-3">
-                            <MudText Typo="Typo.subtitle1"><b>Discussion forum updated</b></MudText>
-                            <MudText Typo="Typo.body2">New thread: "Best Practices in Agile Development"</MudText>
-                            <MudText Typo="Typo.caption">4 hours ago</MudText>
+                            <MudText Typo="Typo.body1">Received feedback on UX/UI 381</MudText>
+                            <MudText Typo="Typo.caption">1 day ago</MudText>
                         </div>
                     </MudListItem>
                 </MudList>
@@ -223,3 +226,4 @@
 @code {
     private bool _drawerOpen = true;
 }
+

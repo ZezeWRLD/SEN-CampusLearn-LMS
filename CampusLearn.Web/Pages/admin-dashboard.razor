@@ -1,0 +1,258 @@
+﻿@page "/admin-dashboard"
+@using System.Collections.Generic
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.School" Edge="Edge.Start" />
+        <MudText Typo="Typo.h6" Class="ml-2">CampusLearn</MudText>
+
+        <MudSpacer />
+
+        <MudTextField T="string"
+                      Variant="Variant.Outlined"
+                      Placeholder="Search courses, assignments, or resources..."
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      Class="hidden-sm-and-down"
+                      Style="width: 400px; background-color: var(--mud-palette-appbar-background); border-radius: 4px;"
+                      Margin="Margin.Dense" />
+
+        <MudSpacer />
+
+        <MudIconButton Icon="@Icons.Material.Filled.Notifications" />
+        <MudIconButton Icon="@Icons.Material.Filled.ChatBubble" />
+        <MudAvatar Image="https://mudblazor.com/images/avatars/4.png" />
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.End" OnClick="@((e) => _drawerOpen = !_drawerOpen)" Class="d-md-none" />
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" Variant="DrawerVariant.Persistent">
+        <MudNavMenu Class="pa-2">
+            <MudNavLink Href="/admin-dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">Dashboard</MudNavLink>
+            <MudNavLink Href="/admin-users" Icon="@Icons.Material.Filled.People">
+                <div class="d-flex justify-space-between" style="width: 100%;">
+                    <span>Users</span>
+                    <MudChip T="string" Color="Color.Info" Size="Size.Small" Text="1,247" />
+                </div>
+            </MudNavLink>
+            <MudNavLink Href="/admin-reports" Icon="@Icons.Material.Filled.Assessment">Reports</MudNavLink>
+
+            <MudText Typo="Typo.overline" Color="Color.Inherit" Class="px-4 mt-4">System</MudText>
+            <MudNavLink Href="/admin-settings" Icon="@Icons.Material.Filled.Settings">Settings</MudNavLink>
+            <MudNavLink Href="/admin-support" Icon="@Icons.Material.Filled.HelpOutline">Support</MudNavLink>
+
+            <MudDivider Class="my-2" />
+            <MudNavLink Href="/logout" Icon="@Icons.Material.Filled.Logout">Logout</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.False" Class="mt-6 px-4">
+
+            <!-- HEADER -->
+            <div class="d-flex justify-space-between align-center mb-4">
+                <div>
+                    <MudText Typo="Typo.h5"><b>Dashboard Overview</b></MudText>
+                    <MudText Typo="Typo.body1">Welcome back, Sarah! Here's what's happening with CampusLearn today.</MudText>
+                </div>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add">Add New User</MudButton>
+            </div>
+
+            <!-- STATS CARDS -->
+            <MudGrid Spacing="3">
+                <MudItem xs="12" sm="6" md="3">
+                    <MudPaper Outlined="true" Class="pa-3 rounded-lg d-flex" Height="100%">
+                        <MudAvatar Color="Color.Primary" Rounded="true" Class="mr-3">
+                            <MudIcon Icon="@Icons.Material.Filled.People" />
+                        </MudAvatar>
+                        <div>
+                            <MudText Typo="Typo.caption">Total Users</MudText>
+                            <MudText Typo="Typo.h5"><b>1,247</b></MudText>
+                            <MudText Typo="Typo.body2" Class="d-flex align-center"><MudIcon Icon="@Icons.Material.Filled.ArrowUpward" Color="Color.Success" Size="Size.Small" /> <span style="color: var(--mud-palette-success);">+12%</span>&nbsp;vs last month</MudText>
+                        </div>
+                    </MudPaper>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="3">
+                    <MudPaper Outlined="true" Class="pa-3 rounded-lg d-flex" Height="100%">
+                        <MudAvatar Color="Color.Success" Rounded="true" Class="mr-3">
+                            <MudIcon Icon="@Icons.Material.Filled.School" />
+                        </MudAvatar>
+                        <div>
+                            <MudText Typo="Typo.caption">Active Courses</MudText>
+                            <MudText Typo="Typo.h5"><b>42</b></MudText>
+                            <MudText Typo="Typo.body2" Class="d-flex align-center"><span style="color: var(--mud-palette-success);">+5 new</span>&nbsp;this month</MudText>
+                        </div>
+                    </MudPaper>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="3">
+                    <MudPaper Outlined="true" Class="pa-3 rounded-lg d-flex" Height="100%">
+                        <MudAvatar Color="Color.Warning" Rounded="true" Class="mr-3">
+                            <MudIcon Icon="@Icons.Material.Filled.Memory" />
+                        </MudAvatar>
+                        <div>
+                            <MudText Typo="Typo.caption">System Usage</MudText>
+                            <MudText Typo="Typo.h5"><b>89%</b></MudText>
+                            <MudText Typo="Typo.body2" Class="d-flex align-center"><MudIcon Icon="@Icons.Material.Filled.ArrowDownward" Color="Color.Error" Size="Size.Small" /> <span style="color: var(--mud-palette-error);">-3%</span>&nbsp;vs last week</MudText>
+                        </div>
+                    </MudPaper>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="3">
+                    <MudPaper Outlined="true" Class="pa-3 rounded-lg d-flex" Height="100%">
+                        <MudAvatar Style="background-color: #6e42c1;" Rounded="true" Class="mr-3">
+                            <MudIcon Icon="@Icons.Material.Filled.TaskAlt" />
+                        </MudAvatar>
+                        <div>
+                            <MudText Typo="Typo.caption">Completion Rate</MudText>
+                            <MudText Typo="Typo.h5"><b>76%</b></MudText>
+                            <MudText Typo="Typo.body2" Class="d-flex align-center"><MudIcon Icon="@Icons.Material.Filled.ArrowUpward" Color="Color.Success" Size="Size.Small" /> <span style="color: var(--mud-palette-success);">+8%</span>&nbsp;vs last month</MudText>
+                        </div>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+
+            <!-- CHARTS GRID -->
+            <MudGrid Class="mt-4" Spacing="3">
+                <!-- User Activity Chart -->
+                <MudItem xs="12" lg="7">
+                    <MudPaper Outlined="true" Class="pa-4 rounded-lg" Height="100%">
+                        <div class="d-flex justify-space-between align-center mb-2">
+                            <MudText Typo="Typo.h6"><b>User Activity</b></MudText>
+                            <MudButtonGroup Variant="Variant.Outlined" Size="Size.Small">
+                                <MudButton>7 Days</MudButton>
+                                <MudButton>30 Days</MudButton>
+                            </MudButtonGroup>
+                        </div>
+                        <MudChart ChartType="ChartType.Bar" ChartSeries="@_barChartSeries" XAxisLabels="@_barChartXAxisLabels" Width="100%" Height="300px"></MudChart>
+                    </MudPaper>
+                </MudItem>
+                <!-- Course Performance Chart -->
+                <MudItem xs="12" lg="5">
+                    <MudPaper Outlined="true" Class="pa-4 rounded-lg" Height="100%">
+                        <div class="d-flex justify-space-between align-center mb-2">
+                            <MudText Typo="Typo.h6"><b>Course Performance</b></MudText>
+                            <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" />
+                        </div>
+                        <MudChart ChartType="ChartType.Donut" InputData="@_donutChartData" InputLabels="@_donutChartLabels" Width="100%" Height="300px"></MudChart>
+                        <!-- Custom Legend -->
+                        <div class="d-flex justify-center flex-wrap mt-2">
+                            <div class="d-flex align-center ma-2"><span style="width:12px; height:12px; background-color:#2196F3; border-radius: 50%; display:inline-block; margin-right: 8px;"></span>Mathematics: 35.5%</div>
+                            <div class="d-flex align-center ma-2"><span style="width:12px; height:12px; background-color:#00C853; border-radius: 50%; display:inline-block; margin-right: 8px;"></span>Business: 25.0%</div>
+                            <div class="d-flex align-center ma-2"><span style="width:12px; height:12px; background-color:#FF9800; border-radius: 50%; display:inline-block; margin-right: 8px;"></span>Programming: 20.0%</div>
+                            <div class="d-flex align-center ma-2"><span style="width:12px; height:12px; background-color:#F44336; border-radius: 50%; display:inline-block; margin-right: 8px;"></span>Design: 12.0%</div>
+                            <div class="d-flex align-center ma-2"><span style="width:12px; height:12px; background-color:#9E9E9E; border-radius: 50%; display:inline-block; margin-right: 8px;"></span>Others: 8.0%</div>
+                        </div>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+
+            <!-- RECENT ACTIVITY TABLE -->
+            <div class="d-flex justify-space-between align-center mt-6 mb-2">
+                <MudText Typo="Typo.h6"><b>Recent Activity</b></MudText>
+                <MudLink Href="#">View All</MudLink>
+            </div>
+
+            <MudPaper Outlined="true" Class="rounded-lg">
+                <MudTable T="ActivityItem" Items="@_recentActivity" Hover="true" Breakpoint="Breakpoint.Sm">
+                    <HeaderContent>
+                        <MudTh>User</MudTh>
+                        <MudTh>Action</MudTh>
+                        <MudTh>Course</MudTh>
+                        <MudTh>Time</MudTh>
+                        <MudTh>Status</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="User">
+                            <div class="d-flex align-center">
+                                <MudAvatar Image="@context.AvatarUrl" Size="Size.Medium" Class="mr-3" />
+                                <div>
+                                    <MudText Typo="Typo.body1"><b>@context.UserName</b></MudText>
+                                    <MudText Typo="Typo.body2">@context.Email</MudText>
+                                </div>
+                            </div>
+                        </MudTd>
+                        <MudTd DataLabel="Action">@context.Action</MudTd>
+                        <MudTd DataLabel="Course">@context.Course</MudTd>
+                        <MudTd DataLabel="Time">@context.Time</MudTd>
+                        <MudTd DataLabel="Status">
+                            <MudChip T="string" Label="true" Size="Size.Small" Color="@context.StatusColor">@context.Status</MudChip>
+                        </MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </MudPaper>
+
+        </MudContainer>
+
+        <!-- FOOTER BANNER -->
+        <MudPaper Elevation="0" Square="true" Class="mud-theme-primary pa-4 mt-8">
+            <MudGrid>
+                <MudItem xs="12" md="8">
+                    <MudText Typo="Typo.h6" Style="color: white;"><b>Need Help?</b></MudText>
+                    <MudText Typo="Typo.body1" Style="color: white;">Check out our documentation for guides and tutorials.</MudText>
+                </MudItem>
+                <MudItem xs="12" md="4" Class="d-flex align-center justify-md-end">
+                    <MudButton Variant="Variant.Outlined" Color="Color.Inherit" Size="Size.Large">View Docs</MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private bool _drawerOpen = true;
+
+    // --- Data for Charts ---
+    private List<ChartSeries> _barChartSeries = new List<ChartSeries>
+    {
+        new ChartSeries { Name = "Active Users", Data = new double[] { 380, 290, 420, 360, 440, 300, 200 } }
+    };
+    private string[] _barChartXAxisLabels = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+
+    private double[] _donutChartData = { 35.5, 25.0, 20.0, 12.0, 8.0 };
+    private string[] _donutChartLabels = { "Mathematics", "Business", "Programming", "Design", "Others" };
+
+    // --- Data for Table ---
+    private class ActivityItem
+    {
+        public string AvatarUrl { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Action { get; set; }
+        public string Course { get; set; }
+        public string Time { get; set; }
+        public string Status { get; set; }
+        public Color StatusColor { get; set; }
+    }
+
+    private IEnumerable<ActivityItem> _recentActivity = new List<ActivityItem>
+    {
+        new ActivityItem {
+            AvatarUrl = "https://mudblazor.com/images/avatars/1.png",
+            UserName = "Michael Chen",
+            Email = "michael@campuslearn.ac.za",
+            Action = "Completed Session",
+            Course = "Advanced Mathematics",
+            Time = "2 minutes ago",
+            Status = "Completed",
+            StatusColor = Color.Success
+        },
+        new ActivityItem {
+            AvatarUrl = "https://mudblazor.com/images/avatars/5.png",
+            UserName = "Emma Wilson",
+            Email = "emma@campuslearn.ac.za",
+            Action = "Started Course",
+            Course = "Web Development",
+            Time = "15 minutes ago",
+            Status = "In Progress",
+            StatusColor = Color.Info
+        },
+        new ActivityItem {
+            AvatarUrl = "https://mudblazor.com/images/avatars/6.png",
+            UserName = "David Rodriguez",
+            Email = "david@campuslearn.ac.za",
+            Action = "Submitted Assignment",
+            Course = "Data Science",
+            Time = "1 hour ago",
+            Status = "Under Review",
+            StatusColor = Color.Warning
+        }
+    };
+}

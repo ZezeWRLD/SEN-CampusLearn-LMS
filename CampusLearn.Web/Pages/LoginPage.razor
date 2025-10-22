@@ -37,27 +37,36 @@
             <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true"><b>Welcome Back</b></MudText>
             <MudText Typo="Typo.body2" Align="Align.Center" Class="mb-4">Sign in to your CampusLearn account</MudText>
 
-            <MudSelect T="string" @bind-Value="_role" Label="Login as" Variant="Variant.Outlined" Class="mt-4">
-                <MudSelectItem Value="@("User")">User (Student)</MudSelectItem>
-                <MudSelectItem Value="@("Tutor")">Tutor</MudSelectItem>
-                <MudSelectItem Value="@("Admin")">Admin</MudSelectItem>
-            </MudSelect>
+            <MudForm @bind-IsValid="_formIsValid" Class="ma-0 pa-0 w-full">
+                <MudSelect T="string" @bind-Value="_role" Label="Login as" Variant="Variant.Outlined" Class="mt-4">
+                    <MudSelectItem Value="@("User")">User (Student)</MudSelectItem>
+                    <MudSelectItem Value="@("Tutor")">Tutor</MudSelectItem>
+                    <MudSelectItem Value="@("Admin")">Admin</MudSelectItem>
+                </MudSelect>
 
-            <MudTextField T="string"
-                          Label="Email Address"
-                          Variant="Variant.Outlined"
-                          Class="mt-4"
-                          IconSize="Size.Small" />
+                <MudTextField T="string"
+                              Label="Email Address"
+                              Variant="Variant.Outlined"
+                              @bind-Value="_email" 
+                              Required="true" 
+                              RequiredError="Email address is required" 
+                              Class="mt-4"
+                              IconSize="Size.Small" />
 
-            <MudTextField T="string"
-                          Label="Password"
-                          Variant="Variant.Outlined"
-                          Class="mt-4"
-                          InputType="@_passwordInputType"
-                          Adornment="Adornment.End"
-                          AdornmentIcon="@_passwordInputIcon"
-                          OnAdornmentClick="TogglePasswordVisibility"
-                          IconSize="Size.Small" />
+                <MudTextField T="string"
+                              Label="Password"
+                              Variant="Variant.Outlined"
+                              @bind-Value="_password" 
+                              Required="true" 
+                              RequiredError="Password is required"
+                              Class="mt-4"
+                              InputType="@_passwordInputType"
+                              Adornment="Adornment.End"
+                              AdornmentIcon="@_passwordInputIcon"
+                              OnAdornmentClick="TogglePasswordVisibility"
+                              IconSize="Size.Small" />
+            </MudForm>
+
 
             <div class="d-flex justify-space-between align-center mt-4">
                 <MudCheckBox T="bool" Label="Remember me" Size="Size.Small" />
@@ -69,7 +78,8 @@
                        Size="Size.Large"
                        FullWidth="true"
                        EndIcon="@Icons.Material.Filled.ArrowForward"
-                       Class="mt-6">
+                       Class="mt-6"
+                       Disabled="@(!_formIsValid)">
                 Login to CampusLearn
             </MudButton>
 
@@ -94,6 +104,12 @@
 </MudLayout>
 
 @code {
+    
+    private bool _formIsValid = false;
+
+    private string _email = "";
+    private string _password = "";
+
     private string _role = "User";
     private bool _isPasswordVisible = false;
     private InputType _passwordInputType = InputType.Password;

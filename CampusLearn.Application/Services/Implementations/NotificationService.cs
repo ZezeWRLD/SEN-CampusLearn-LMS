@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CampusLearn.Application.Services.Implementations
 {
-    internal class NotificationService : INotificationService
+    public class NotificationService : INotificationService
     {
         private readonly CampusLearnDbContext _context;
 

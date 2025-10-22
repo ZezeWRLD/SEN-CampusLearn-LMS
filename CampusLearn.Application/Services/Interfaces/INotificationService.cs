@@ -7,7 +7,7 @@ using CampusLearn.Infrastructure.Data.Entities;
 
 namespace CampusLearn.Application.Services.Interfaces
 {
-    internal interface INotificationService
+    public interface INotificationService
     {
         Task<Notification> GetNotificationAsync(int id);
         Task<IEnumerable<Notification>> GetAllNotificationsAsync();

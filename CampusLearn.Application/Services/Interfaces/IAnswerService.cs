@@ -7,7 +7,7 @@ using CampusLearn.Infrastructure.Data.Entities;
 
 namespace CampusLearn.Application.Services.Interfaces
 {
-    internal interface IAnswerService
+    public interface IAnswerService
     {
         Task<IEnumerable<Answer>> GetAllAsync();
         Task<Answer?> GetByIdAsync(int id);

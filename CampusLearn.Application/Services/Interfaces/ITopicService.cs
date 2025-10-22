@@ -7,7 +7,7 @@ using CampusLearn.Infrastructure.Data.Entities;
 
 namespace CampusLearn.Application.Services.Interfaces
 {
-    internal interface ITopicService
+    public interface ITopicService
     {
         Task<IEnumerable<Topic>> GetAllAsync();
         Task<Topic?> GetByIdAsync(int id);

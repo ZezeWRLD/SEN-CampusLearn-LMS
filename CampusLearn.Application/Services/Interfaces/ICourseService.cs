@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CampusLearn.Application.Services.Interfaces
 {
-    internal interface ICourseService
+    public interface ICourseService
     {
         Task<IEnumerable<Course>> GetAllAsync();
         Task<Course?> GetByIdAsync(int id);

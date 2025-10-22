@@ -6,11 +6,11 @@ namespace CampusLearn.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class MessagesController : ControllerBase
+    public class AnswersController : ControllerBase
     {
-        private readonly IMessageService _service;
+        private readonly IAnswerService _service;
 
-        public MessagesController(IMessageService service)
+        public AnswersController(IAnswerService service)
         {
             _service = service;
         }
@@ -21,21 +21,21 @@ namespace CampusLearn.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var message = await _service.GetByIdAsync(id);
-            return message == null ? NotFound() : Ok(message);
+            var answer = await _service.GetByIdAsync(id);
+            return answer == null ? NotFound() : Ok(answer);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Message message)
+        public async Task<IActionResult> Create([FromBody] Answer answer)
         {
-            var created = await _service.CreateAsync(message);
-            return CreatedAtAction(nameof(GetById), new { id = created.MessageId }, created);
+            var created = await _service.CreateAsync(answer);
+            return CreatedAtAction(nameof(GetById), new { id = created.AnswerId }, created);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Message message)
+        public async Task<IActionResult> Update(int id, [FromBody] Answer answer)
         {
-            var updated = await _service.UpdateAsync(id, message);
+            var updated = await _service.UpdateAsync(id, answer);
             return updated == null ? NotFound() : Ok(updated);
         }
 

@@ -1,6 +1,12 @@
-﻿namespace CampusLearn.API.Controllers
+﻿using CampusLearn.Application.Services.Interfaces;
+using CampusLearn.Infrastructure.Data.Entities;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CampusLearn.API.Controllers
 {
-    public class QuestionsController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class QuestionsController : ControllerBase
     {
     }
 }

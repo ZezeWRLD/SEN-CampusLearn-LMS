@@ -1,16 +1,16 @@
 ﻿@page "/"
 
+
 <style>
-    /* Style for the soft gradient background */
+   
     .login-background {
         background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 50%, #f0f7ff 100%);
-        height: 100vh; /* Ensure it fills the whole screen */
+        height: 100vh; 
         width: 100%;
-        overflow: auto; /* Allow scrolling if content is too tall on small screens */
-        
+        overflow: auto; 
     }
 
-    /* Simple footer style */
+   
     .login-footer {
         position: absolute;
         bottom: 16px;
@@ -33,35 +33,41 @@
             <div class="d-flex justify-center mb-4">
                 <MudAvatar Color="Color.Primary" Rounded="true" Size="Size.Large">
                     <MudIcon Icon="@Icons.Material.Filled.School" Size="Size.Medium" />
-                </MudAvatar>
-            </div>
+                </MudAvatar> </div>
 
             <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true"><b>Welcome Back</b></MudText>
             <MudText Typo="Typo.body2" Align="Align.Center" Class="mb-4">Sign in to your CampusLearn account</MudText>
 
-            <MudSelect T="string" @bind-Value="_role" Label="Login as" Variant="Variant.Outlined" Class="mt-4">
-                <MudSelectItem Value="@("User")">User (Student)</MudSelectItem>
-                <MudSelectItem Value="@("Tutor")">Tutor</MudSelectItem>
-                <MudSelectItem Value="@("Admin")">Admin</MudSelectItem>
-            </MudSelect>
+            <MudForm @ref="_form" @bind-IsValid="_formIsValid" Class="ma-0 pa-0 w-full">
+                <MudSelect T="string" @bind-Value="_role" Label="Login as" Variant="Variant.Outlined" Class="mt-4">
+                    <MudSelectItem Value="@("User")">User (Student)</MudSelectItem>
+                    <MudSelectItem Value="@("Tutor")">Tutor</MudSelectItem>
+                    <MudSelectItem Value="@("Admin")">Admin</MudSelectItem>
+                </MudSelect>
 
-            <MudTextField T="string"
-                          Label="Email Address"
-                          Variant="Variant.Outlined"
-                          Class="mt-4"
-                          IconSize="Size.Small" 
-                          Required/>
+                <MudTextField T="string"
+                              Label="Email Address"
+                              Variant="Variant.Outlined"
+                              @bind-Value="_email" 
+                              Required="true" 
+                              RequiredError="Email address is required" 
+                              Class="mt-4"
+                              IconSize="Size.Small" />
 
-            <MudTextField T="string"
-                          Label="Password"
-                          Variant="Variant.Outlined"
-                          Class="mt-4"
-                          InputType="@_passwordInputType"
-                          Adornment="Adornment.End"
-                          AdornmentIcon="@_passwordInputIcon"
-                          OnAdornmentClick="TogglePasswordVisibility"
-                          IconSize="Size.Small" 
-                          Required/>
+                <MudTextField T="string"
+                              Label="Password"
+                              Variant="Variant.Outlined"
+                              @bind-Value="_password" 
+                              Required="true" 
+                              RequiredError="Password is required"
+                              Class="mt-4"
+                              InputType="@_passwordInputType"
+                              Adornment="Adornment.End"
+                              AdornmentIcon="@_passwordInputIcon"
+                              OnAdornmentClick="TogglePasswordVisibility"
+                              IconSize="Size.Small" />
+            </MudForm>
+
 
             <div class="d-flex justify-space-between align-center mt-4">
                 <MudCheckBox T="bool" Label="Remember me" Size="Size.Small" />
@@ -73,7 +79,9 @@
                        Size="Size.Large"
                        FullWidth="true"
                        EndIcon="@Icons.Material.Filled.ArrowForward"
-                       Class="mt-6">
+                       Class="mt-6"
+                       Disabled="@(!_formIsValid)"
+                       OnClick="Login"> 
                 Login to CampusLearn
             </MudButton>
 
@@ -98,7 +106,19 @@
 </MudLayout>
 
 @code {
+    
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
+
+    
+    private MudForm _form = new MudForm();
+    private bool _formIsValid = false;
+
     private string _role = "User";
+    private string _email = "";
+    private string _password = "";
+
+    
     private bool _isPasswordVisible = false;
     private InputType _passwordInputType = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
@@ -108,5 +128,28 @@
         _isPasswordVisible = !_isPasswordVisible;
         _passwordInputType = _isPasswordVisible ? InputType.Text : InputType.Password;
         _passwordInputIcon = _isPasswordVisible ? Icons.Material.Filled.Visibility : Icons.Material.Filled.VisibilityOff;
+    }
+
+    
+    private async Task Login()
+    {
+        
+        await _form.Validate();
+
+        
+        if (_formIsValid)
+        {
+            
+            string targetUrl = _role switch
+            {
+                "User" => "/student-dashboard",    
+                "Tutor" => "/tutor-dashboard",     
+                "Admin" => "/Admin-dashboard",     
+                _ => "/" 
+            };
+
+            
+            NavigationManager.NavigateTo(targetUrl);
+        }
     }
 }

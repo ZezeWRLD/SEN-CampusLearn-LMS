@@ -33,11 +33,11 @@ namespace CampusLearn.Application.Services.Implementations
                 .FirstOrDefaultAsync(u => u.UserEmail == request.UserEmail);
 
             if (user == null || user.Password == null)
-                return new AuthResponseDto { Message = "User not found.", Token = string.Empty, Role = string.Empty };
+                return new AuthResponseDto { Message = "User not found.", Token = string.Empty, Role = string.Empty, success = false };
 
             bool isValidPassword = BCrypt.Net.BCrypt.Verify(request.Password, user.Password.PasswordHash);
             if (!isValidPassword)
-                return new AuthResponseDto { Message = "Invalid credentials.", Token = string.Empty, Role = string.Empty };
+                return new AuthResponseDto { Message = "Invalid credentials.", Token = string.Empty, Role = string.Empty, success = false };
 
             string role = user.Roles.FirstOrDefault()?.RoleName ?? "student";
 
@@ -46,12 +46,13 @@ namespace CampusLearn.Application.Services.Implementations
             {
                 Message = "Login successful.",
                 Token = token,
-                Role = role
+                Role = role,
+                success = false
             };
         }
 
         // ------------------ REGISTER ------------------
-        public async Task<AuthResponseDto> RegisterAsync(RegisterRequestDto request)
+        /*public async Task<AuthResponseDto> RegisterAsync(RegisterRequestDto request)
         {
             if (await _context.Users.AnyAsync(u => u.UserEmail == request.UserEmail))
                 return new AuthResponseDto { Message = "User already exists.", Token = string.Empty, Role = string.Empty };
@@ -78,12 +79,11 @@ namespace CampusLearn.Application.Services.Implementations
             await _context.Passwords.AddAsync(passwordEntity);
 
             // Assign role (13=Student, 14=Tutor, 15=Admin)
-            var userRole = new Userrole
+            var userRole = new Role
             {
-                UserEmail = request.UserEmail,
                 RoleId = request.RoleId
             };
-            await _context.Userroles.AddAsync(userRole);
+            await _context..AddAsync(userRole);
 
             await _context.SaveChangesAsync();
 
@@ -116,7 +116,7 @@ namespace CampusLearn.Application.Services.Implementations
 
             string role = user?.Userroles.FirstOrDefault()?.Role?.RoleName ?? "student";
             return new UserInfoDto { Email = email, Role = role };
-        }
+        } */
 
     }
 }

@@ -11,5 +11,6 @@ namespace CampusLearn.Application.DTOs
         public string Message { get; set; } = null!;
         public required string Token { get; set; }
         public required string Role { get; set; }
+        public required bool success { get; set; }
     }
 }

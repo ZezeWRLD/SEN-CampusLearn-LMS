@@ -10,8 +10,8 @@ namespace CampusLearn.Application.Services.Interfaces
 {
     public interface IAuthService
     {
-        Task<AuthResponseDto> RegisterAsync(RegisterRequestDto request);
+       // Task<AuthResponseDto> RegisterAsync(RegisterRequestDto request);
         Task<AuthResponseDto> LoginAsync(LoginRequestDto request);
-        Task<UserInfoDto> ValidateTokenAsync(string token);
+       // Task<UserInfoDto> ValidateTokenAsync(string token);
     }
 }

@@ -2,6 +2,7 @@
 using CampusLearn.Application.Services.Implementations;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using CampusLearn.Application.DTOs;
 
 namespace CampusLearn.API.Controllers
 {
@@ -19,17 +20,17 @@ namespace CampusLearn.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            var token = await _authService.AuthenticateAsync(request.Email, request.Password);
+            LoginRequestDto loginRequestDto = new LoginRequestDto
+            {
+                UserEmail = request.Email,
+                Password = request.Password
+            };
+            var token = await _authService.LoginAsync(loginRequestDto);
 
             if (token == null)
                 return Unauthorized(new { message = "Invalid credentials" });
 
             return Ok(new { token });
         }
-    }
-    public class LoginRequest
-    {
-        public string Email { get; set; } = null!;
-        public string Password { get; set; } = null!;
     }
 }

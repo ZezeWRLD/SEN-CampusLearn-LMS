@@ -55,6 +55,13 @@ namespace CampusLearn.Application.Services.Implementations
         {
             _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
+            var pref = await _context.Notificationpreferences
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(p => p.User.UserEmail == notification.UserEmail);
+            if (pref != null && pref.EmailEnabled ==true && pref.User != null)
+            {
+                await SendEmailAsync(pref.User.UserEmail, $"New {notification.NotificationType}", notification.NotificationBody ?? "");
+            }
             return notification;
         }
         public async Task<Notification?> UpdateNotificationAsync(int id, Notification updatedNotification)

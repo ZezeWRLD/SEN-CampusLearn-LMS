@@ -1,5 +1,6 @@
 ﻿using CampusLearn.Application.Services.Interfaces;
 using CampusLearn.Infrastructure.Data.Entities;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CampusLearn.API.Controllers
@@ -44,6 +45,25 @@ namespace CampusLearn.API.Controllers
         {
             var result = await _service.DeleteNotificationAsync(id);
             return result ? NoContent() : NotFound();
+        }
+        [HttpPost("send-email")]
+        public async Task<IActionResult> SendEmail([FromBody] EmailRequest request)
+        {
+            try
+            {
+                await _service.SendEmailAsync(request.To, request.Subject, request.Body);
+                return Ok(new { Message = "Email sent successfully" });
+            }
+            catch (Exception ex) 
+            {
+                return BadRequest(new {Message = $"Failed to send email: {ex.Message}" });
+            }
+        }
+        public class EmailRequest
+        {
+            public string To { get; set; } = string.Empty;
+            public string Subject { get; set; } = string.Empty;
+            public string Body { get; set; } = string.Empty;
         }
     }
 }

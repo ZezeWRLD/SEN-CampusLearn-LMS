@@ -10,6 +10,6 @@ namespace CampusLearn.Application.Services.Interfaces
     public interface IJwtTokenService
     {
         string GenerateToken(string email, string role);
-        DecodedTokenDto? ValidateToken(string token);
+       // DecodedTokenDto? ValidateToken(string token);
     }
 }

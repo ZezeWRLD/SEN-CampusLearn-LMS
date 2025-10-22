@@ -15,5 +15,8 @@ public partial class Notification
     [Column("notification_status")]
     public string? NotificationStatus { get; set; }
 
+    [Column("notification_body")]
+    public string? NotificationBody { get; set; }
+
     public virtual User? UserEmailNavigation { get; set; }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CampusLearn.Application.Services.Implementations
 {
-    internal class AnswerService : IAnswerService
+    public class AnswerService : IAnswerService
     {
         private readonly CampusLearnDbContext _context;
 

@@ -14,6 +14,7 @@ public partial class User
     public string UserName { get; set; } = null!;
     [Column("course_id")]
     public int? CourseId { get; set; }
+    public virtual Password? Password { get; set; }
 
     public virtual ICollection<Answer> Answers { get; set; } = new List<Answer>();
 

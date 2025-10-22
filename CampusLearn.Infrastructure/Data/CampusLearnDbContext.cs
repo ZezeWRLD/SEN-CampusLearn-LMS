@@ -462,6 +462,35 @@ public partial class CampusLearnDbContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("votes_user_id_fkey");
         });
+        modelBuilder.Entity<Password>(entity =>
+        {
+            entity.HasKey(e => e.PasswordId)
+                .HasName("passwords_pkey");
+
+            entity.ToTable("passwords");
+
+            entity.Property(e => e.PasswordId)
+                .HasColumnName("password_id");
+
+            entity.Property(e => e.UserEmail)
+                .HasMaxLength(255)
+                .HasColumnName("user_email");
+
+            entity.Property(e => e.PasswordHash)
+                .HasMaxLength(255)
+                .HasColumnName("password_hash");
+
+            entity.HasIndex(e => e.UserEmail)
+                .IsUnique()
+                .HasDatabaseName("passwords_user_email_key");
+
+            entity.HasOne(d => d.User)
+                .WithOne(p => p.Password)
+                .HasForeignKey<Password>(d => d.UserEmail)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_user_email");
+        });
+
 
         OnModelCreatingPartial(modelBuilder);
     }

@@ -7,9 +7,9 @@ using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using CampusLearn.API.Helpers;
-using CampusLearn.Application.Services.Interfaces;
-using CampusLearn.Application.Services.Implementations;
+//using CampusLearn.API.Helpers;
+//using CampusLearn.Application.Services.Interfaces;
+//using CampusLearn.Application.Services.Implementations;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,7 +25,7 @@ builder.Services.AddScoped<INotificationService, NotificationService>();
 
 builder.Services.AddControllers();
 
-var jwtSettings = builder.Configuration.GetSection("Jwt");
+/*var jwtSettings = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -43,7 +43,7 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = jwtSettings["Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!))
     };
-});
+}); */
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -61,10 +61,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();
-
-app.UseAuthorization();
-
 app.MapControllers();
 
 using (var scope = app.Services.CreateScope())

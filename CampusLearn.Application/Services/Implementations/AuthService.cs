@@ -15,12 +15,10 @@ namespace CampusLearn.Application.Services.Implementations
     public class AuthService : IAuthService
     {
         private readonly CampusLearnDbContext _context;
-        private readonly IJwtTokenService _jwtTokenService;
 
-        public AuthService(CampusLearnDbContext context, IJwtTokenService jwtTokenService)
+        public AuthService(CampusLearnDbContext context)
         {
             _context = context;
-            _jwtTokenService = jwtTokenService;
         }
 
         // ------------------ LOGIN ------------------
@@ -33,19 +31,17 @@ namespace CampusLearn.Application.Services.Implementations
                 .FirstOrDefaultAsync(u => u.UserEmail == request.UserEmail);
 
             if (user == null || user.Password == null)
-                return new AuthResponseDto { Message = "User not found.", Token = string.Empty, Role = string.Empty, success = false };
+                return new AuthResponseDto { Message = "User not found.", Role = string.Empty, success = false };
 
             bool isValidPassword = BCrypt.Net.BCrypt.Verify(request.Password, user.Password.PasswordHash);
             if (!isValidPassword)
-                return new AuthResponseDto { Message = "Invalid credentials.", Token = string.Empty, Role = string.Empty, success = false };
+                return new AuthResponseDto { Message = "Invalid credentials.", Role = string.Empty, success = false };
 
             string role = user.Roles.FirstOrDefault()?.RoleName ?? "student";
 
-            var token = _jwtTokenService.GenerateToken(user.UserEmail, role);
             return new AuthResponseDto
             {
                 Message = "Login successful.",
-                Token = token,
                 Role = role,
                 success = false
             };

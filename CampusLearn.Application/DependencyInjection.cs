@@ -20,6 +20,8 @@ namespace CampusLearn.Application
             services.AddScoped<ITopicService, TopicService>();
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<INotificationService, NotificationService>();
+            Services.AddScoped<IJwtTokenService, JwtTokenGenerator>();
+            Services.AddScoped<IAuthService, AuthService>();
             return services;
         }
     }

@@ -14,6 +14,12 @@ namespace CampusLearn.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<IAnswerService, AnswerService>();
+            services.AddScoped<ITopicService, TopicService>();
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<INotificationService, NotificationService>();
             return services;
         }
     }

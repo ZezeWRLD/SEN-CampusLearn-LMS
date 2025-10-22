@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CampusLearn.Application.Services.Implementations
 {
-    internal class TopicService
+    internal class TopicService : ITopicService
     {
         private readonly CampusLearnDbContext _context;
 

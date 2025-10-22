@@ -1,0 +1,108 @@
+﻿@page "/"
+
+<style>
+    /* Style for the soft gradient background */
+    .login-background {
+        background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 50%, #f0f7ff 100%);
+        height: 100vh; /* Ensure it fills the whole screen */
+        width: 100%;
+        overflow: auto; /* Allow scrolling if content is too tall on small screens */
+    }
+
+    /* Simple footer style */
+    .login-footer {
+        position: absolute;
+        bottom: 16px;
+        width: 100%;
+        text-align: center;
+    }
+</style>
+
+<MudLayout>
+    <MudAppBar Elevation="1" Color="Color.Primary">
+        <MudIconButton Icon="@Icons.Material.Filled.School" Edge="Edge.Start" />
+        <MudText Typo="Typo.h6" Class="ml-2">CampusLearn</MudText>
+        <MudSpacer />
+    </MudAppBar>
+
+    <MudMainContent Class="login-background d-flex justify-center align-center pa-4">
+
+        <MudPaper Elevation="2" Class="pa-6 rounded-lg" Style="width: 100%; max-width: 450px;">
+            <div class="d-flex justify-center mb-4">
+                <MudAvatar Color="Color.Primary" Rounded="true" Size="Size.Large">
+                    <MudIcon Icon="@Icons.Material.Filled.School" Size="Size.Medium" />
+                </MudAvatar>
+            </div>
+
+            <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true"><b>Welcome Back</b></MudText>
+            <MudText Typo="Typo.body2" Align="Align.Center" Class="mb-4">Sign in to your CampusLearn account</MudText>
+
+            <MudSelect T="string" @bind-Value="_role" Label="Login as" Variant="Variant.Outlined" Class="mt-4">
+                <MudSelectItem Value="@("User")">User (Student)</MudSelectItem>
+                <MudSelectItem Value="@("Tutor")">Tutor</MudSelectItem>
+                <MudSelectItem Value="@("Admin")">Admin</MudSelectItem>
+            </MudSelect>
+
+            <MudTextField T="string"
+                          Label="Email Address"
+                          Variant="Variant.Outlined"
+                          Class="mt-4"
+                          IconSize="Size.Small" />
+
+            <MudTextField T="string"
+                          Label="Password"
+                          Variant="Variant.Outlined"
+                          Class="mt-4"
+                          InputType="@_passwordInputType"
+                          Adornment="Adornment.End"
+                          AdornmentIcon="@_passwordInputIcon"
+                          OnAdornmentClick="TogglePasswordVisibility"
+                          IconSize="Size.Small" />
+
+            <div class="d-flex justify-space-between align-center mt-4">
+                <MudCheckBox T="bool" Label="Remember me" Size="Size.Small" />
+                <MudLink Href="#" Typo="Typo.body2">Forgot your password?</MudLink>
+            </div>
+
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Size="Size.Large"
+                       FullWidth="true"
+                       EndIcon="@Icons.Material.Filled.ArrowForward"
+                       Class="mt-6">
+                Login to CampusLearn
+            </MudButton>
+
+            <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-6">
+                Don't have an account?
+                <MudLink Href="#" Color="Color.Primary"><b>Sign up for free</b></MudLink>
+            </MudText>
+        </MudPaper>
+
+        <div class="login-footer">
+            <MudText Typo="Typo.caption">
+                <MudLink Href="#" Color="Color.Inherit" Class="mx-2">Help Center</MudLink>
+                &bull;
+                <MudLink Href="#" Color="Color.Inherit" Class="mx-2">Privacy Policy</MudLink>
+                &bull;
+                <MudLink Href="#" Color="Color.Inherit" Class="mx-2">Terms of Service</MudLink>
+            </MudText>
+            <MudText Typo="Typo.caption" Class="mt-1">&copy; @DateTime.Now.Year CampusLearn. All rights reserved.</MudText>
+        </div>
+
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private string _role = "User";
+    private bool _isPasswordVisible = false;
+    private InputType _passwordInputType = InputType.Password;
+    private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    private void TogglePasswordVisibility()
+    {
+        _isPasswordVisible = !_isPasswordVisible;
+        _passwordInputType = _isPasswordVisible ? InputType.Text : InputType.Password;
+        _passwordInputIcon = _isPasswordVisible ? Icons.Material.Filled.Visibility : Icons.Material.Filled.VisibilityOff;
+    }
+}

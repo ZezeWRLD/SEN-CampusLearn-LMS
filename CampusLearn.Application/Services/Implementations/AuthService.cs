@@ -26,24 +26,41 @@ namespace CampusLearn.Application.Services.Implementations
         {
             var user = await _context.Users
                 .Include(u => u.Password)
-                .Include(u => u.Roles)
-                    .ThenInclude(ur => ur.RoleId)
                 .FirstOrDefaultAsync(u => u.UserEmail == request.UserEmail);
 
-            if (user == null || user.Password == null)
-                return new AuthResponseDto { Message = "User not found.", Role = string.Empty, success = false };
+            if (user == null)
+            {
+                return new AuthResponseDto
+                {
+                    Message = "User not found.",
+                    success = false
+                };
+            }
+
+            if (user.Password == null)
+            {
+                return new AuthResponseDto
+                {
+                    Message = "No password set for this account.",
+                    success = false
+                };
+            }
 
             bool isValidPassword = BCrypt.Net.BCrypt.Verify(request.Password, user.Password.PasswordHash);
-            if (!isValidPassword)
-                return new AuthResponseDto { Message = "Invalid credentials.", Role = string.Empty, success = false };
 
-            string role = user.Roles.FirstOrDefault()?.RoleName ?? "student";
+            if (!isValidPassword)
+            {
+                return new AuthResponseDto
+                {
+                    Message = "Invalid email or password.",
+                    success = false
+                };
+            }
 
             return new AuthResponseDto
             {
                 Message = "Login successful.",
-                Role = role,
-                success = false
+                success = true
             };
         }
 

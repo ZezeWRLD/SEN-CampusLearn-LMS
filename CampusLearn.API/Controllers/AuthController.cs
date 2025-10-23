@@ -25,12 +25,12 @@ namespace CampusLearn.API.Controllers
                 UserEmail = request.Email,
                 Password = request.Password
             };
-            var token = await _authService.LoginAsync(loginRequestDto);
+            var result = await _authService.LoginAsync(loginRequestDto);
 
-            if (token == null)
+            if (result == null)
                 return Unauthorized(new { message = "Invalid credentials" });
 
-            return Ok(new { token });
+            return Ok(new { result });
         }
     }
 }
